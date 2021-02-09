@@ -19,7 +19,7 @@ HEADER_X_DATE = "X-Sdk-Date"
 
 # HWS API Gateway Signature
 class _Request:
-    def __init__(self, method: str, url: Union[str, URL], headers: Dict = None, body: Dict = None):
+    def __init__(self, method: str, url: Union[str, URL], headers: Dict = None, body: Union[str, Dict] = None):
         if isinstance(url, URL):
             url = str(url)
         parsing_url = urlparse(url)
@@ -42,6 +42,17 @@ class Signer:
     def __init__(self, key: str, secret: str):
         self.key = key
         self.secret = secret
+
+    def verify(self, r, authorization):
+        header_time = self._find_header(r, HEADER_X_DATE)
+        if header_time is None:
+            return False
+        t = datetime.strptime(header_time, BASIC_DATE_FORMAT)
+        signed_headers = self._get_list_signed_headers(r)
+        canonical_request = self._get_canonical_request(r, signed_headers)
+        string_to_sign = self._get_string_to_sign(canonical_request, t)
+
+        return authorization == self._sign_string_to_sign(string_to_sign, self.secret)
 
     # SignRequest set Authorization header
     def signer(self, r: _Request):

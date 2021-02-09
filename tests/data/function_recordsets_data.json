@@ -1,0 +1,104 @@
+{
+  "data_list_recordsets": {
+    "links": {
+      "self": "https://example.com/v2/zones/75c475a8e48c88237727526be73e6458/recordsets"
+    },
+    "recordsets": [
+      {
+        "id": "904c7bb028272c846572c0e08b8cb290",
+        "name": "auto.example.",
+        "description": null,
+        "type": "A",
+        "ttl": 3600,
+        "records": [
+          "10.200.200.1"
+        ],
+        "status": "ACTIVE",
+        "zone_id": "75c475a8e48c88237727526be73e6458",
+        "zone_name": "example.",
+        "create_at": "2020-10-14T17:31:47.106",
+        "update_at": "2020-11-25T07:12:32.489",
+        "default": false,
+        "project_id": "10f03cf77f209f79fc8fd002952821a7",
+        "links": {
+          "self": "https://example.com/v2/zones/75c475a8e48c88237727526be73e6458/recordsets/904c7bb028272c846572c0e08b8cb290"
+        }
+      },
+      {
+        "id": "3b1aa56287852a83840405477fa476aa",
+        "name": "auto-2.example.",
+        "description": null,
+        "type": "A",
+        "ttl": 3600,
+        "records": [
+          "10.200.200.2"
+        ],
+        "status": "ACTIVE",
+        "zone_id": "75c475a8e48c88237727526be73e6458",
+        "zone_name": "example.",
+        "create_at": "2020-10-14T17:31:47.143",
+        "update_at": "2020-11-25T08:16:48.406",
+        "default": false,
+        "project_id": "10f03cf77f209f79fc8fd002952821a7",
+        "links": {
+          "self": "https://example.com/v2/zones/75c475a8e48c88237727526be73e6458/recordsets/3b1aa56287852a83840405477fa476aa"
+        }
+      },
+      {
+        "id": "95c4466986d2b66987688ac786025370",
+        "name": "aut-3.example.",
+        "description": null,
+        "type": "A",
+        "ttl": 86400,
+        "records": [
+          "10.200.200.3"
+        ],
+        "status": "ACTIVE",
+        "zone_id": "75c475a8e48c88237727526be73e6458",
+        "zone_name": "example.",
+        "create_at": "2020-10-14T17:31:47.178",
+        "update_at": "2020-12-16T15:12:08.176",
+        "default": false,
+        "project_id": "10f03cf77f209f79fc8fd002952821a7",
+        "links": {
+          "self": "https://example.com/v2/zones/75c475a8e48c88237727526be73e6458/recordsets/95c4466986d2b66987688ac786025370"
+        }
+      }
+    ],
+    "metadata": {
+      "total_count": 3
+    }
+  },
+  "data_single_recordset": {
+    "id": "904c7bb028272c846572c0e08b8cb290",
+    "name": "auto.example.",
+    "description": null,
+    "type": "A",
+    "ttl": 3600,
+    "records": [
+      "10.200.200.1"
+    ],
+    "status": "ACTIVE",
+    "zone_id": "75c475a8e48c88237727526be73e6458",
+    "zone_name": "example.",
+    "create_at": "2020-10-14T17:31:47.106",
+    "update_at": "2020-11-25T07:12:32.489",
+    "default": false,
+    "project_id": "10f03cf77f209f79fc8fd002952821a7",
+    "links": {
+      "self": "https://example.com/v2/zones/75c475a8e48c88237727526be73e6458/recordsets/904c7bb028272c846572c0e08b8cb290"
+    }
+  },
+  "data_error_text": {
+    "message": "here is error"
+  },
+  "data_list_empty": {
+    "links": {
+      "self": "https://example.com/v2/zones/75c475a8e48c88237727526be73e6458/recordsets"
+    },
+    "recordsets": [],
+    "metadata": {
+      "total_count": 3
+    }
+  }
+}

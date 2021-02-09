@@ -1,4 +1,7 @@
+import copy
 from typing import Dict, List
+
+from feihua.exceptions import ClientError
 
 SUCCESSFUL_STATUS_CODE = (200, 202, 204)
 
@@ -7,21 +10,21 @@ class Recordset:
     """Recordset Resource"""
 
     def __init__(
-            self,
-            id: str,
-            zone_id: str,
-            name: str,
-            description: str,
-            type: str,
-            ttl: int,
-            records: List[str],
-            status: str,
-            zone_name: str,
-            default: bool,
-            links: Dict,
-            project_id: str,
-            create_at: str,
-            update_at: str,
+        self,
+        id: str,
+        zone_id: str,
+        name: str,
+        description: str,
+        type: str,
+        ttl: int,
+        records: List[str],
+        status: str,
+        zone_name: str,
+        default: bool,
+        links: Dict,
+        project_id: str,
+        create_at: str,
+        update_at: str,
     ):
         # The id if recordset
         self.id = id
@@ -92,6 +95,8 @@ class Recordsets:
         return await self._return_single_object(response, status_code)
 
     async def update_record(self, zone_id: str, recordset_id: str, data: Dict):
+        if "name" in data:
+            raise ClientError(status=400, data={"message": "Attribute 'name' is immutable."})
         response, status_code = await self.client._query_json(
             api_version=self.api_version,
             path=self.base_path.format(zone_id=zone_id) + "/" + recordset_id,
@@ -119,16 +124,18 @@ class Recordsets:
 
     @staticmethod
     async def _return_single_object(response, status_code):
+        new_response = {}
         if status_code in SUCCESSFUL_STATUS_CODE:
-            response = Recordset(**response)
-        return response, status_code
+            new_response = Recordset(**response)
+        return new_response, status_code
 
     @staticmethod
     async def _return_list_objects(response, status_code):
         if status_code in SUCCESSFUL_STATUS_CODE:
-            recordsets = response["recordsets"]
-            if recordsets:
-                recordsets = [Recordset(**record) for record in recordsets]
-                response["recordsets"] = recordsets
-        return response, status_code
+            new_response = copy.deepcopy(response)
+            recordsets = new_response["recordsets"]
 
+            if new_response.get("recordsets", None):
+                new_response["recordsets"] = [Recordset(**record) for record in recordsets]
+            return new_response, status_code
+        return response, status_code

@@ -13,21 +13,18 @@ async def parse_result(response, response_type=None, *, encoding="utf-8"):
             cl = response.headers.get("content-length")
             if cl is None or cl == "0":
                 return ""
-            raise TypeError(
-                "Cannot auto-detect response type "
-                "due to missing Content-Type header."
-            )
+            raise TypeError("Cannot auto-detect response type " "due to missing Content-Type header.")
         main_type, sub_type, extras = parse_content_type(ct)
         if sub_type == "json":
             response_type = "json"
         # left as an example
         # elif sub_type == "x-tar":
-            # response_type = "tar"
+        # response_type = "tar"
         elif (main_type, sub_type) == ("text", "plain"):
             response_type = "text"
             encoding = extras.get("charset", encoding)
         else:
-            raise TypeError("Unrecognized response type: {ct}".format(ct=ct))
+            raise TypeError(f"Unrecognized response type: {ct}")
     # left as an example
     # if "tar" == response_type:
     #     what = await response.read()
@@ -51,7 +48,7 @@ def parse_content_type(ct: str) -> Tuple[str, str, Mapping[str, str]]:
     try:
         main_type, sub_type = pieces[0].split("/")
     except ValueError:
-        msg = 'Invalid mime-type component: "{0}"'.format(pieces[0])
+        msg = f'Invalid mime-type component: "{pieces[0]}"'
         raise ValueError(msg)
     if len(pieces) > 1:
         options = {}
@@ -62,7 +59,7 @@ def parse_content_type(ct: str) -> Tuple[str, str, Mapping[str, str]]:
             try:
                 k, v = opt.split("=", 1)
             except ValueError:
-                msg = 'Invalid option component: "{0}"'.format(opt)
+                msg = f'Invalid option component: "{opt}"'
                 raise ValueError(msg)
             else:
                 options[k.lower()] = v.lower()
