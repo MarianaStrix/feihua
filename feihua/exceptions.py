@@ -4,8 +4,8 @@ class ClientError(Exception):
         self.status = status
         self.message = data["message"]
 
-    def __repr__(self):
-        return "ClientError({self.status}, {self.message!r})".format(self=self)
-
     def __str__(self):
-        return "ClientError({self.status}, {self.message!r})".format(self=self)
+        return f"ClientError({self.status}, {self.message!r})"
+
+    def __repr__(self):
+        return self.__str__()

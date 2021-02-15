@@ -1,0 +1,108 @@
+[tool.poetry]
+name = "feihua"
+version = "0.0.0"
+description = "Feihua - Huawei Cloud API async client"
+authors = [
+    "Ibragimova Maria <MIgIbragimova@sberbank.ru>",
+]
+license = "Proprietary"
+classifiers = [
+    "Environment :: Console",
+    "Environment :: Web Environment",
+    "Framework :: AsyncIO",
+    "Framework :: Aiohttp",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Information Technology",
+    "Intended Audience :: Other Audience",
+    "License :: Other/Proprietary License",
+    "Natural Language :: Russian",
+    "Operating System :: POSIX",
+    "Operating System :: POSIX :: Linux",
+    "Operating System :: MacOS",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3 :: Only"
+]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+aiohttp = { extras = ["speedups"], version = "^3.7" }
+
+[tool.poetry.dev-dependencies]
+pytest = { version = "^6.1" }
+pytest-asyncio = { version = "^0.14" }
+black = { version = "^20.8b1" }
+pre-commit = { version = "*" }
+isort = { version = "*", extras = ["pyproject"] }
+
+### DEBUG
+aiohttp-debugtoolbar = { version = "*" }
+
+[tool.poetry-dynamic-versioning]
+enable = true
+vcs = "git"
+metadata = true
+dirty = true
+pattern = '^(?P<base>\d+\.\d+\.\d+)(-?((?P<stage>[a-zA-Z]+)\.?(?P<revision>\d+)?))?$'
+format = "{base}+{distance}.{commit}"
+
+[tool.poetry-dynamic-versioning.substitution]
+files = ["*.py", "*/__init__.py", "*/__version__.py", "*/_version.py"]
+
+[tool.black]
+line_length = 120
+multi_line_output = 3
+length_sort = true
+target-version = ["py38"]
+include = '\.pyi?$'
+exclude = '''
+(
+  /(
+      \.eggs         # exclude a few common directories in the
+    | \.git          # root of the project
+    | \.hg
+    | \.mypy_cache
+    | \.tox
+    | \.venv
+    | _build
+    | buck-out
+    | build
+    | dist
+  )/
+  | foo.py           # also separately exclude a file named foo.py in
+                     # the root of the project
+)
+'''
+
+[tool.isort]
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+ensure_newline_before_comments = true
+line_length = 120
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra -s -vv"
+testpaths = [
+    "tests",
+    "test_*",
+    "tests_*",
+    "*_test",
+    "*_tests"
+]
+python_files = [
+    "tests.py",
+    "test_*.py",
+    "tests_*.py",
+    "*_test.py",
+    "*_tests.py"
+]
+
+[build-system]
+requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning"]
+build-backend = "poetry.core.masonry.api"
