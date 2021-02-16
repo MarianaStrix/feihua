@@ -86,10 +86,11 @@ How to bump the version of the library?
 3. Create distribution archives `poetry build`
 4. Push tag in project `git push --tags`
 5. Load package to pypi:
-    1. Downoload and install certificates from https://atlas.swec.sbercloud.ru/bitbucket/projects/INFRA/repos/ssl-ca/browse
+    1. Download and install certificates from https://atlas.swec.sbercloud.ru/bitbucket/projects/INFRA/repos/ssl-ca/browse
     2. Create common pem file: `cat sat-root.crt sat-external-ca.crt > sat_pypi.pem`
     3. Connect to VPN
-    4. install twine tool and execute`twine upload --cert ~/Path_to_certs/sat_pypi.pem  --repository-url https://mirror.int.sbauto.tech/pypi/  dist/*`
+    4. Set the path to the certificate in poetry.toml certificates.feihua.cert = <absolute_path_cert>
+    5. Load packege`poetry publish -r feihua`
 
 #### Pre-commit
 

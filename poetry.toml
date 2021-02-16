@@ -1,0 +1,7 @@
+[repositories]
+[repositories.feihua]
+url = "https://mirror.int.sbauto.tech/pypi/"
+
+[certificates]
+[certificates.feihua]
+cert = ""
