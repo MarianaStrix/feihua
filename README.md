@@ -80,6 +80,17 @@ Poetry Dynamic Versioning triggered by `poetry build` and make package with repl
 
 - `pip install poetry-dynamic-versioning` # globally
 
+How to bump the version of the library?
+1. Set git tag `git tag 0.1.0 -m "Initial project"`
+2. Dump version `poetry-dynamic-versioning`
+3. Create distribution archives `poetry build`
+4. Push tag in project `git push --tags`
+5. Load package to pypi:
+    1. Downoload and install certificates from https://atlas.swec.sbercloud.ru/bitbucket/projects/INFRA/repos/ssl-ca/browse
+    2. Create common pem file: `cat sat-root.crt sat-external-ca.crt > sat_pypi.pem`
+    3. Connect to VPN
+    4. install twine tool and execute`twine upload --cert ~/Path_to_certs/sat_pypi.pem  --repository-url https://mirror.int.sbauto.tech/pypi/  dist/*`
+
 #### Pre-commit
 
 [Pre-Commit Documentation](https://pre-commit.com/)
