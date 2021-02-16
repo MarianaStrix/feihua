@@ -47,7 +47,7 @@ vcs = "git"
 metadata = true
 dirty = true
 pattern = '^(?P<base>\d+\.\d+\.\d+)(-?((?P<stage>[a-zA-Z]+)\.?(?P<revision>\d+)?))?$'
-format = "{base}+{distance}.{commit}"
+format-jinja = "{% if distance == 0 %}{{ base }}{% else %}{{ base }}+{{ distance }}.{{ commit }}{% endif %}"
 
 [tool.poetry-dynamic-versioning.substitution]
 files = ["*.py", "*/__init__.py", "*/__version__.py", "*/_version.py"]
