@@ -3,7 +3,7 @@ name = "feihua"
 version = "0.0.0"
 description = "Feihua - Huawei Cloud API async client"
 authors = [
-    "Ibragimova Maria <MIgIbragimova@sberbank.ru>",
+    "Ibragimova Maria <marianastrix@gmail.com>",
 ]
 license = "Proprietary"
 classifiers = [

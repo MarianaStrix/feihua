@@ -1,14 +1,14 @@
 ## Feihua
 ___________
 #### What is it?
-Huawei Cloud API async client. 
-
+Huawei Cloud API async client for DNS.
+[Link](https://support.huaweicloud.com/intl/en-us/wtsnew-dns/index.html) to Huawei Cloud documentation.
 Example of use:
 ```Python
 from feihua.client import Client
 access_key_id = "EXAMPLE_ACCESS_KEY_ID"
 secret_access_key = "EXAMPLE_SECRET_ACCESS_KEY"
-host = "dns.region.hc.sbercloud.ru"
+host = "dns.example.ru"
 zone_id = "EXAMPLE_ID"
 client = Client(access_key_id=access_key_id, secret_access_key=secret_access_key, host=host)
 
@@ -17,7 +17,7 @@ data_response, code_status = await client.recordsets.list(zone_id=zone_id)
 
 # return created recordset in zone
 data = {
-    "name": "example6.com.c.sbauto.tech.",
+    "name": "record.example.com.",
     "type": "A",
     "records": [
         "10.200.200.116",
@@ -40,10 +40,18 @@ data_response, code_status = await client.recordsets.delete_record(zone_id=zone_
 
 # return recordset in zone
 query = {
-    "id": "8a9487e17432ccb701776d23acff776a"
+    "id": "67857858897556785456786545678456"
 }
 data_response, code_status = await client.recordsets.find_records(zone_id=zone_id, query=query)
 ```
+ 
+#### VirtualEnv
+
+Before install poetry set the default virtual environment as `.venv`.
+
+Cause it default path for poetry env
+
+- `virtualenv .venv` 
 
 #### Poetry
 
@@ -85,12 +93,7 @@ How to bump the version of the library?
 2. Dump version `poetry-dynamic-versioning`
 3. Create distribution archives `poetry build`
 4. Push tag in project `git push --tags`
-5. Load package to pypi:
-    1. Download and install certificates from https://atlas.swec.sbercloud.ru/bitbucket/projects/INFRA/repos/ssl-ca/browse
-    2. Create common pem file: `cat sat-root.crt sat-external-ca.crt > sat_pypi.pem`
-    3. Connect to VPN
-    4. Set the path to the certificate in poetry.toml certificates.feihua.cert = <absolute_path_cert>
-    5. Load packege`poetry publish -r feihua`
+5. Load packege`poetry publish -r feihua`
 
 #### Pre-commit
 
@@ -102,3 +105,6 @@ Pre-commit hooks apply rules from `.pre-commit-config.yml`
 - `pre-commit autoupdate` update hooks (if you know what you do)
 - `git commit -m "<message>" -n` where __**-n**__ is for skip hooks (if you really know what you do)
 
+#### Tests
+Run tests
+ - `poetry run pytest tests`
