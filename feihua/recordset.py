@@ -64,6 +64,9 @@ class Recordset:
     def to_dict(self):
         return vars(self)
 
+    def __str__(self):
+        return "_".join([self.name, self.type, ",".join(self.records), str(self.ttl)])
+
 
 class Recordsets:
     """Recordsets resource represent list all recordset API response"""
